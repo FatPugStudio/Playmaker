@@ -4,39 +4,41 @@
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
+
 {
     [ActionCategory(ActionCategory.Physics)]
     [Tooltip("Enables or disables Canvas")]
     [HelpUrl("")]
     public class EnableCanvas : ComponentAction<Canvas>
+    
     {
         [RequiredField]
         [CheckForComponent(typeof(Canvas))]
         [Tooltip("Canvas to enable.")]
         public FsmOwnerDefault gameObject;
 	
-		[Tooltip("Enabled")]
+	[Tooltip("Enabled")]
         public FsmBool enabled;
        
         public override void Reset()
+	
         {
             gameObject = null;
-			enabled = false;
+	    enabled = false;
         }
 
         public override void OnEnter()
-        {
-            DoChange();
-
+        
+	{   
+	    DoChange();
         }
 
         void DoChange()
         
-		{
+	{
             var go = Fsm.GetOwnerDefaultTarget(gameObject);
             Canvas canvas = go.GetComponent<Canvas>();
-			canvas.enabled = enabled.Value;
-                   
+	    canvas.enabled = enabled.Value;         
         }
     }
 }
