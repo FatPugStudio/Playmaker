@@ -1,0 +1,67 @@
+// (c) Copyright HutongGames, LLC 2010-2019. All rights reserved.
+/*--- __ECO__ __PLAYMAKER__ __ACTION__ ---*/
+
+using UnityEngine;
+
+namespace HutongGames.PlayMaker.Actions
+{
+	[ActionCategory(ActionCategory.Renderer)]
+	[Tooltip("Gets the color of a SpriteRenderer component.")]
+	public class SpriteRendererGetColor : ComponentAction<SpriteRenderer>
+	{
+		[RequiredField]
+		[CheckForComponent(typeof(SpriteRenderer))]
+		[Tooltip("The GameObject with the SpriteRenderer component.")]
+		public FsmOwnerDefault gameObject;
+
+		[RequiredField]
+		[Tooltip("Color of the SpriteRenderer component.")]
+		[UIHint(UIHint.Variable)]
+		public FsmColor colorVariable;
+		
+		
+		[Tooltip("Repeat every frame.")]
+	    public bool everyFrame;
+
+		private SpriteRenderer spriteRenderer;
+
+		public override void Reset()
+		{
+			gameObject = null;
+			colorVariable = null;
+			everyFrame = false;
+		}
+		
+		public override void OnEnter()
+		{
+			GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
+			if (go == null) return;
+			
+			spriteRenderer = go.GetComponent<SpriteRenderer>();
+			
+			if (spriteRenderer == null)
+				
+			{
+				LogError("Target GameObject Missing SpriteRenderer!");
+				return;
+			}
+			
+			DoGetColorValue();
+			
+			if (!everyFrame)
+				Finish();	
+		}
+		
+		public override void OnUpdate()
+		{
+			DoGetColorValue();
+		}
+
+		void DoGetColorValue()
+		{
+			
+			colorVariable.Value = spriteRenderer.color;
+		}
+		
+	}
+}
