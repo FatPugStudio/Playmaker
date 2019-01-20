@@ -1,0 +1,27 @@
+#if PLAYMAKER
+using Com.LuisPedroFonseca.ProCamera2D;
+using HutongGames.PlayMaker;
+using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
+using UnityEngine;
+
+[Tooltip("Enters the transition")]
+public class PC2DTransitionsFxEnter : FsmStateActionProCamera2DBase
+{
+	[RequiredField]
+	[Tooltip("The gameObject that contains the ProCamera2DCinematics component")]
+	public FsmGameObject TransitionsFX;
+
+	public override void OnEnter()
+	{
+		var transitionsfx = TransitionsFX.Value.GetComponent<ProCamera2DTransitionsFX>();
+
+		if (transitionsfx == null)
+			Debug.LogError("No TransitionsFX component found in the gameObject: " + TransitionsFX.Value.name);
+
+		if (ProCamera2D.Instance != null && transitionsfx != null)
+			transitionsfx.TransitionEnter();
+
+		Finish();
+	}
+}
+#endif
