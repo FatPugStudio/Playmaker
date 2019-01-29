@@ -2,6 +2,7 @@
 Playmaker Actions for Unity3D
 
 Enable Canvas
+<br>
 Pro Camera 2D Transitions FX Enter
 Set Circle Collider 2D Radisu
 Sprite Renderer Get Color
