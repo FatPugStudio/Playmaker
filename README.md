@@ -4,9 +4,15 @@ Playmaker Actions for Unity3D
 Enable Canvas
 <br>
 Pro Camera 2D Transitions FX Enter
-Set Circle Collider 2D Radisu
+<br>
+Set Circle Collider 2D Radius
+<br>
 Sprite Renderer Get Color
+<br>
 UniBulletHell Release Bullet
+<br>
 UniBulletHell Start Shot Routine
+<br>
 UniBulletHell Stop Shot Routine
+<br>
 UniBulletHell Stop Shot Routine And Playing Shot
