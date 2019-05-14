@@ -16,3 +16,5 @@ UniBulletHell Start Shot Routine
 UniBulletHell Stop Shot Routine
 <br>
 UniBulletHell Stop Shot Routine And Playing Shot
+<br>
+Core Game Kit Get Prefab Name
