@@ -32,14 +32,14 @@ namespace HutongGames.PlayMaker.Actions
 		{
 				
 			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (!UpdateCache(go)) 
+			if (go == null) 
 				
 		{
 			return;
 	
 		}
 			
-			var ubhbullet = This.CachedComponent;
+			var ubhbullet = go.GetComponent<UbhBullet>();
 			
 			if (ubhbullet == null)
 				
