@@ -3,46 +3,50 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 
-    public class UBHReleaseBullet : FsmStateAction
+    public class UBHReleaseBullet : ComponentAction<UbhShotCtrl>
 	
 	{
 	
 		[RequiredField]
+		[CheckForComponent(typeof(UbhShotCtrl))]
 		[Tooltip("The GameObject with UbhBullet component")]
 		public FsmOwnerDefault gameObject;
 	
 		public override void Reset()
 
-			{
-            gameObject = null;
-			}
+		{
+            		gameObject = null;
+		}
 		
 		public override void OnEnter()
-			{
+			
+		{
 			
 			ReleaseBullet();
 			Finish();
 			
-			}
+		}
 		
 		void ReleaseBullet()
 		
-			{
+		{
 				
-				var go = Fsm.GetOwnerDefaultTarget(gameObject);
-				if (go == null) 
+			var go = Fsm.GetOwnerDefaultTarget(gameObject);
+			if (go == null) 
 				
-			{
-				return;
-			
-			}
+		{
+			return;
+	
+		}
 			
 			var ubhbullet = go.GetComponent<UbhBullet>();
 			
 			if (ubhbullet == null)
 				
 			{
-                Debug.LogError("No UbhBullet component found in the gameObject: " + go.name);
+			
+                	Debug.LogError("No UbhBullet component found in the gameObject: " + go.name);
+			
 			}
 			
 			if (ubhbullet != null)
@@ -53,7 +57,7 @@ namespace HutongGames.PlayMaker.Actions
 			
 			}
     
+		}
 	}
-}
 
 }
