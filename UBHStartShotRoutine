@@ -1,53 +1,54 @@
 using UnityEngine;
 
-namespace HutongGames.PlayMaker.Actions {
+namespace HutongGames.PlayMaker.Actions
+{
 
-    public class UBHStartShotRoutine : ComponentAction<UbhShotCtrl>
+    public class UBHStartShotRoutine : FsmStateAction
     {
         [RequiredField]
-        [CheckForComponent (typeof (UbhShotCtrl))]
-        [Tooltip ("The GameObject with UbhBullet component")]
+        [Tooltip("The GameObject with UbhShotCtrl component")]
         public FsmOwnerDefault gameObject;
 
-        public override void Reset ()
+        public override void Reset()
 
         {
             gameObject = null;
         }
 
-        public override void OnEnter () {
-
-            StartShot ();
-            Finish ();
-        }
-
-        void StartShot ()
-
+        public override void OnEnter()
         {
-
-            var go = Fsm.GetOwnerDefaultTarget (gameObject);
+			
+			StartShot();
+			Finish();
+		}
+		
+		void StartShot()
+		
+		{
+			
+			var go = Fsm.GetOwnerDefaultTarget(gameObject);
+			if (go == null)
+		
+			{
+				return;
+			}
+			
+		         
+            var ubh = go.GetComponent<UbhShotCtrl>();
             
-            if (!UpdateCache (go))
-
-            {
-                return;
-            }
-
-            var ubh = go.GetComponent<UbhShotCtrl> ();
-
             if (ubh == null)
-
-            {
-                Debug.LogError ("No UbhShotCtrl component found in the gameObject: " + go.name);
-            }
-
+				
+			{
+                Debug.LogError("No UbhShotCtrl component found in the gameObject: " + go.name);
+			}
+			
             if (ubh != null)
-
-            {
-                ubh.StartShotRoutine ();
-                Finish ();
-            }
-
+			
+			{
+                ubh.StartShotRoutine();
+				Finish();
+			}
+            
         }
     }
 }
