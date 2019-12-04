@@ -1,53 +1,54 @@
 using UnityEngine;
 
-namespace HutongGames.PlayMaker.Actions {
+namespace HutongGames.PlayMaker.Actions
+{
 
-    public class UBHStopShotRoutine : ComponentAction<UbhShotCtrl>
-    
+    public class UBHStopShotRoutine : FsmStateAction
     {
         [RequiredField]
-        [CheckForComponent (typeof (UbhShotCtrl))]
-        [Tooltip ("The GameObject with UbhBullet component")]
+        [Tooltip("The GameObject with UbhShotCtrl component")]
         public FsmOwnerDefault gameObject;
 
-        public override void Reset ()
+        public override void Reset()
 
         {
             gameObject = null;
         }
 
-        public override void OnEnter () {
-
-            StopShot ();
-            Finish ();
-        }
-
-        void StopShot ()
-
+        public override void OnEnter()
         {
-
-            var go = Fsm.GetOwnerDefaultTarget (gameObject);
-            if (!UpdateCache (go))
-
-            {
-                return;
-            }
-
-            var ubh = go.GetComponent<UbhShotCtrl> ();
-
+			
+			StopShot();
+			Finish();
+		}
+		
+		void StopShot()
+		
+		{
+			
+			var go = Fsm.GetOwnerDefaultTarget(gameObject);
+			if (go == null)
+		
+			{
+				return;
+			}
+			
+		         
+            var ubh = go.GetComponent<UbhShotCtrl>();
+            
             if (ubh == null)
-
-            {
-                Debug.LogError ("No UbhShotCtrl component found in the gameObject: " + go.name);
-            }
-
+				
+			{
+                Debug.LogError("No UbhShotCtrl component found in the gameObject: " + go.name);
+			}
+			
             if (ubh != null)
-
-            {
-                ubh.StopShotRoutine ();
-                Finish ();
-            }
-
+			
+			{
+                ubh.StopShotRoutine();
+				Finish();
+			}
+            
         }
     }
 }
